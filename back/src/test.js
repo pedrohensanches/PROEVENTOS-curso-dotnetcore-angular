@@ -1,1 +1,3 @@
-testealterado
+testealterado: function() {
+
+}
