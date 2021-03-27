@@ -26,6 +26,14 @@ namespace ProEventos.API.Controllers
             return _context.Eventos;
         }
 
+        // [HttpGet("{query}")]
+        // public Evento GetByTEmaOuLocal(string query)
+        // {
+        //     query = query.ToLower();
+        //     return _context.Eventos.Where(e => e.Tema.ToLower().Contains(query) ||
+        //     e.Local.ToLower().Contains(query)).FirstOrDefault();
+        // }
+
         [HttpGet("{id}")]
         public Evento GetById(int id)
         {
