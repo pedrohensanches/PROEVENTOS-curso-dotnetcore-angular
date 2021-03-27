@@ -2,40 +2,67 @@
 <hr />
 
 <!-- Emmet atalho - form.form-inline>.form-group.mb-2  -->
-<form action="" class="form-inline">
+<div class="form-inline">
   <div class="form-group mb-2">
     <!-- input.form-control.mr-2[placeholder=buscar] -->
-    <input type="text" class="form-control mr-2" placeholder="buscar" />
+    <input
+      type="text"
+      class="form-control mr-2"
+      placeholder="buscar"
+      [(ngModel)]="filtroLista"
+    />
     <!-- btn.btn.btn-outline-success -->
     <button class="btn btn-outline-success">Buscar</button>
   </div>
-</form>
-
-<!-- table.table.table-striped>thead.thead-dark>tr>th*8 -->
-<table class="table table-striped">
-  <thead class="thead-dark">
-    <tr>
-      <th>#</th>
-      <th>Imagem</th>
-      <th>Tema</th>
-      <th>Local</th>
-      <th>Data</th>
-      <th>Qtd Pessoas</th>
-      <th>Lote</th>
-      <th>Opções</th>
-    </tr>
-  </thead>
-  <!-- tbody>tr>td*8 -->
-  <tbody>
-    <tr *ngFor="let evento of eventos">
-      <td></td>
-      <td>{{evento.imagemURL}}</td>
-      <td>{{evento.tema}}</td>
-      <td>{{evento.local}}</td>
-      <td>{{evento.dataEvento}}</td>
-      <td>{{evento.qtdPessoas}}</td>
-      <td>{{evento.lote}}</td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+</div>
+<div class="table-responsive-lg">
+  <!-- table.table.table-striped>thead.thead-dark>tr>th*8 -->
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>
+          <!-- (click)="exibeImg = !exibeImg" -->
+          <button class="btn btn-outline-light btn-sm" (click)="exibirImg()">
+            {{ exibeImg ? "Ocultar" : "Exibir" }}
+          </button>
+        </th>
+        <th>#</th>
+        <th>Tema</th>
+        <th>Local</th>
+        <th>Data</th>
+        <th>Qtd Pessoas</th>
+        <th>Lote</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <!-- tbody>tr>td*8 -->
+    <tbody *ngIf="eventosFiltrados && eventosFiltrados.length > 0">
+      <tr *ngFor="let evento of eventosFiltrados">
+        <td>
+          <img
+            [collapse]="!exibeImg"
+            [isAnimated]="true"
+            src="/assets/{{ evento.imagemURL }}"
+            [style.width.px]="larguraImg"
+            [style.margin.px]="margenImg"
+          />
+        </td>
+        <td>{{ evento.eventoId }}</td>
+        <td>{{ evento.tema }}</td>
+        <td>{{ evento.local }}</td>
+        <td>{{ evento.dataEvento }}</td>
+        <td>{{ evento.qtdPessoas }}</td>
+        <td>{{ evento.lote }}</td>
+        <td></td>
+      </tr>
+    </tbody>
+    <!-- tfoot>tr>td[colspan=8] -->
+    <tfoot *ngIf="!eventosFiltrados || eventosFiltrados.length <= 0">
+      <tr>
+        <td colspan="8" class="text-center">
+          <h5>Nenhum evento encontrado.</h5>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
