@@ -2,13 +2,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ProEventos.Domain;
+using ProEventos.Persistence.Contextos;
+using ProEventos.Persistence.Contratos;
 
 namespace ProEventos.Persistence
 {
-    public class ProEventosPersistence : IProEventosPersistence
+    public class EventoPersistence : IEventoPersistence
     {
         private readonly ProEventosContext _context;
-        public ProEventosPersistence(ProEventosContext context)
+        public EventoPersistence(ProEventosContext context)
         {
             this._context = context;
         }
@@ -66,7 +68,7 @@ namespace ProEventos.Persistence
             return await query.ToArrayAsync();
         }
 
-        public async Task<Evento> GetAllEventoByIdAsync(int id, bool incluePalestrantes = false)
+        public async Task<Evento> GetEventoByIdAsync(int id, bool incluePalestrantes = false)
         {
             IQueryable<Evento> query = _context.Eventos.Include(e => e.Lotes)
                                                      .Include(e => e.RedesSociais);
