@@ -43,7 +43,7 @@ namespace ProEventos.Application
                 else
                 {
                     model.Id = evento.Id;
-                    _geralPersistence.Update<Evento>(evento);
+                    _geralPersistence.Update(model);
                 }
 
                 if (await _geralPersistence.SaveChangesAsync())

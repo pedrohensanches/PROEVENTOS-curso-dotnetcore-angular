@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ProEventos.Application.Contratos;
 using ProEventos.Domain;
-using ProEventos.Persistence.Contextos;
 
 namespace ProEventos.API.Controllers
 {
@@ -10,49 +13,112 @@ namespace ProEventos.API.Controllers
     [Route("api/[controller]")]
     public class EventosController : ControllerBase
     {
-        private readonly ProEventosContext _context;
+        private readonly IEventoService _service;
 
-        public EventosController(ProEventosContext context)
+        public EventosController(IEventoService service)
         {
-            this._context = context;
+            this._service = service;
         }
 
         [HttpGet]
-        public IEnumerable<Evento> Get()
+        public async Task<IActionResult> GetAll()
         {
-            return _context.Eventos;
+            try
+            {
+                var eventos = await _service.GetAllEventosAsync(true);
+                if (eventos == null)
+                    return NotFound("Nenhum evento encontrado.");
+                else
+                    return Ok(eventos);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar buscar por eventos. Erro: {ex.Message}");
+            }
         }
 
-        // [HttpGet("{query}")]
-        // public Evento GetByTEmaOuLocal(string query)
-        // {
-        //     query = query.ToLower();
-        //     return _context.Eventos.Where(e => e.Tema.ToLower().Contains(query) ||
-        //     e.Local.ToLower().Contains(query)).FirstOrDefault();
-        // }
+        [HttpGet("{tema}/tema")]
+        public async Task<IActionResult> GetAllByTema(string tema)
+        {
+            try
+            {
+                var eventos = await _service.GetAllEventosByTemaAsync(tema, true);
+                if (eventos == null)
+                    return NotFound("Nenhum evento com o tema informado foi encontrado.");
+                else
+                    return Ok(eventos);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar buscar por eventos. Erro: {ex.Message}");
+            }
+        }
 
         [HttpGet("{id}")]
-        public Evento GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return _context.Eventos.Where(e => e.Id == id).FirstOrDefault();
+            try
+            {
+                var evento = await _service.GetEventoByIdAsync(id, true);
+                if (evento == null)
+                    return NotFound("Nenhum evento encontrado.");
+                else
+                    return Ok(evento);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar buscar por eventos. Erro: {ex.Message}");
+            }
         }
 
         [HttpPost]
-        public string Post()
+        public async Task<ActionResult> Post(Evento model)
         {
-            return "exemplo post";
+            try
+            {
+                var evento = await _service.AddEvento(model);
+                if (evento == null)
+                    return BadRequest("Erro ao tentar adicionar evento.");
+                else
+                    return Ok(evento);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar adicionar evento. Erro: {ex.Message}");
+            }
         }
 
         [HttpPut("{id}")]
-        public string Put(int id)
+        public async Task<ActionResult> Put(int id, Evento model)
         {
-            return $"exemplo put com id = {id}";
+            try
+            {
+                var evento = await _service.UpdateEvento(id, model);
+                if (evento == null)
+                    return BadRequest("Erro ao tentar atualizar evento.");
+                else
+                    return Ok(evento);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar atualizar evento. Erro: {ex.Message}");
+            }
         }
 
         [HttpDelete("{id}")]
-        public string Deleter(int id)
+        public async Task<ActionResult> Deleter(int id)
         {
-            return $"exemplo delete com id = {id}";
+            try
+            {
+                if (await _service.DeleteEvento(id))
+                    return Ok("Evento deletado!");
+                else
+                    return BadRequest("Erro ao tentar deletar o evento.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao tentar deletar evento. Erro: {ex.Message}");
+            }
         }
     }
 }

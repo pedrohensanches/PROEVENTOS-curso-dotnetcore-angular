@@ -50,7 +50,7 @@ namespace ProEventos.Persistence
                              .ThenInclude(pe => pe.Palestrante);
 
             query = query.OrderBy(e => e.Id);
-            return await query.ToArrayAsync();
+            return await query.AsNoTracking().ToArrayAsync();
         }
 
         public async Task<Evento[]> GetAllEventosByTemaAsync(string tema, bool incluePalestrantes = false)
@@ -65,7 +65,7 @@ namespace ProEventos.Persistence
             query = query.Where(e => e.Tema.ToLower().Contains(tema.ToLower()))
                          .OrderBy(e => e.Id);
 
-            return await query.ToArrayAsync();
+            return await query.AsNoTracking().ToArrayAsync();
         }
 
         public async Task<Evento> GetEventoByIdAsync(int id, bool incluePalestrantes = false)
@@ -80,7 +80,7 @@ namespace ProEventos.Persistence
             query = query.Where(e => e.Id == id)
                          .OrderBy(e => e.Id);
 
-            return await query.FirstOrDefaultAsync();
+            return await query.AsNoTracking().FirstOrDefaultAsync();
         }
 
         public async Task<Palestrante[]> GetAllPalestrantesAsync(bool includeEventos)
@@ -92,7 +92,7 @@ namespace ProEventos.Persistence
                              .ThenInclude(pe => pe.Evento);
 
             query = query.OrderBy(p => p.Id);
-            return await query.ToArrayAsync();
+            return await query.AsNoTracking().ToArrayAsync();
         }
 
         public async Task<Palestrante[]> GetAllPalestrantesByNomeAsync(string nome, bool includeEventos)
@@ -106,7 +106,7 @@ namespace ProEventos.Persistence
             query = query.Where(p => p.Nome.ToLower().Contains(nome.ToLower()))
                          .OrderBy(p => p.Id);
 
-            return await query.ToArrayAsync();
+            return await query.AsNoTracking().ToArrayAsync();
         }
 
         public async Task<Palestrante> GetPalestranteByIdAsync(int id, bool includeEventos)
@@ -120,7 +120,7 @@ namespace ProEventos.Persistence
             query = query.Where(p => p.Id == id)
                          .OrderBy(p => p.Id);
 
-            return await query.FirstOrDefaultAsync();
+            return await query.AsNoTracking().FirstOrDefaultAsync();
         }
     }
 }
