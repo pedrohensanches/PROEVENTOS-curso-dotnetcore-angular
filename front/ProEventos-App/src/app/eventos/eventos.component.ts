@@ -1,38 +1,40 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Evento } from '../models/Evento';
+import { EventoService } from '../services/evento.service';
 
 @Component({
   selector: 'app-eventos',
   templateUrl: './eventos.component.html',
   styleUrls: ['./eventos.component.scss'],
+  // providers: [EventoService]
 })
 export class EventosComponent implements OnInit {
-  public eventos: any = [];
-  public eventosFiltrados: any = [];
-  larguraImg = 150;
-  margenImg = 2;
-  exibeImg = false;
-  private _filtroLista: string = '';
+  public eventos: Evento[] = [];
+  public eventosFiltrados: Evento[] = [];
+  public larguraImg = 150;
+  public margenImg = 2;
+  public exibeImg = false;
+  private filtroListado = '';
 
   public get filtroLista(): string {
-    return this._filtroLista;
+    return this.filtroListado;
   }
 
   public set filtroLista(v: string) {
-    this._filtroLista = v;
+    this.filtroListado = v;
     this.eventosFiltrados =
       this.filtroLista && this.filtroLista !== ''
         ? this.filtrarEventos(this.filtroLista)
         : this.eventos;
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private eventoService: EventoService) {}
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.getEventos();
   }
 
-  public filtrarEventos(query: string): any {
+  public filtrarEventos(query: string): Evento[] {
     query = query.toLocaleLowerCase();
     return this.eventos.filter(
       (e: any) =>
@@ -42,10 +44,13 @@ export class EventosComponent implements OnInit {
   }
 
   public getEventos(): void {
-    this.http.get('https://localhost:5001/api/eventos').subscribe(
-      (response) => (this.eventos = this.eventosFiltrados = response),
-      (error) => console.log(error)
-    );
+    // tslint:disable-next-line: deprecation
+    this.eventoService.getEventos().subscribe({
+      next: (eventos: Evento[]) => {
+        this.eventos = this.eventosFiltrados = eventos;
+      },
+      error: (error: any) => console.log(error),
+    });
   }
 
   public exibirImg(): void {
