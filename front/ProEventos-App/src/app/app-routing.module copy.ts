@@ -7,14 +7,12 @@ import { PalestrantesComponent } from './components/palestrantes/palestrantes.co
 import { PerfilComponent } from './components/perfil/perfil.component';
 
 const routes: Routes = [
-
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'eventos', component: EventosComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'palestrantes', component: PalestrantesComponent },
   { path: 'perfis', component: PerfilComponent },
   { path: 'contatos', component: ContatosComponent },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({
