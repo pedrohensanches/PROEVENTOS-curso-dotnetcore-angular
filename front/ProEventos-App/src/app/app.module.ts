@@ -19,6 +19,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TituloComponent } from './shared/titulo/titulo.component';
 import { NavComponent } from './shared/nav/nav.component';
+import { EventoDetalheComponent } from './components/eventos/evento-detalhe/evento-detalhe.component';
+import { EventoListaComponent } from './components/eventos/evento-lista/evento-lista.component';
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 
@@ -35,6 +37,8 @@ import { EventoService } from './services/evento.service';
     TituloComponent,
     NavComponent,
     DateTimeFormatPipe,
+    EventoDetalheComponent,
+    EventoListaComponent,
   ],
   imports: [
     BrowserModule,
