@@ -48,7 +48,11 @@
       </thead>
       <!-- tbody>tr>td*8 -->
       <tbody *ngIf="eventosFiltrados && eventosFiltrados.length > 0">
-        <tr *ngFor="let evento of eventosFiltrados">
+        <tr
+          *ngFor="let evento of eventosFiltrados"
+          (click)="detalheEvento(evento.id)"
+          style="cursor: pointer"
+        >
           <td class="d-none d-md-table-cell">
             <img
               [collapse]="!exibeImg"
@@ -72,6 +76,7 @@
               type="button"
               class="btn btn-primary btn-sm mr-2 d-none d-md-inline-block"
               tooltip="Editar"
+              (click)="detalheEvento(evento.id)"
             >
               <i class="fa fa-edit"></i>
             </button>
