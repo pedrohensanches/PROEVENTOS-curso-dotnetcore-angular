@@ -1,6 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" *ngIf="showMenu()">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="dashboard">ProEventos</a>
+    <a class="navbar-brand" routerLink="dashboard">
+      <i class="fa fa-users"></i>
+    </a>
     <button
       class="navbar-toggler"
       (click)="minimizado = !minimizado"
@@ -59,7 +61,7 @@
               Perfil
             </a>
             <div role="separator" class="divider"></div>
-            <a class="dropdown-item" href="#"> Sair </a>
+            <a class="dropdown-item" routerLink="user/login"> Sair </a>
           </div>
         </li>
       </ul>
