@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "t2eY4Aa6idHfXYnFY1UP6UBzK50rkOTh5/q/Q4N6gKihI8u8LJRXydwY7lqDdqCuOfwaxwBnbUJ0cJW2kFmDrA==",
+  "dgSpecHash": "CoPCFW4Z0zL94CMIkcIWVB/uC7xbCjKmc1lqhDG8LVygC/73zpzhLe/Enl8ZkcbcOp/XeBR9vXiPb7yTZjV0fA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Pedro Sanches\\Documents\\PROEVENTOS\\back\\src\\ProEventos.API\\ProEventos.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Pedro Sanches\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
+    "C:\\Users\\Pedro Sanches\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\Pedro Sanches\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Pedro Sanches\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.5\\microsoft.aspnetcore.jsonpatch.5.0.5.nupkg.sha512",
     "C:\\Users\\Pedro Sanches\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\5.0.5\\microsoft.aspnetcore.mvc.newtonsoftjson.5.0.5.nupkg.sha512",
@@ -43,7 +45,8 @@
     "C:\\Users\\Pedro Sanches\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",
     "C:\\Users\\Pedro Sanches\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "C:\\Users\\Pedro Sanches\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.1\\system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512",
-    "C:\\Users\\Pedro Sanches\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+    "C:\\Users\\Pedro Sanches\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\Pedro Sanches\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

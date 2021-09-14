@@ -65,3 +65,5 @@ C:\Users\Pedro Sanches\Documents\PROEVENTOS\back\src\ProEventos.API\bin\Debug\ne
 C:\Users\Pedro Sanches\Documents\PROEVENTOS\back\src\ProEventos.API\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Pedro Sanches\Documents\PROEVENTOS\back\src\ProEventos.API\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\Pedro Sanches\Documents\PROEVENTOS\back\src\ProEventos.API\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\Pedro Sanches\Documents\PROEVENTOS\back\src\ProEventos.API\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\Pedro Sanches\Documents\PROEVENTOS\back\src\ProEventos.API\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
