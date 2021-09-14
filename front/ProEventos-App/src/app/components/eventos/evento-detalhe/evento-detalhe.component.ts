@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -7,27 +7,55 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./evento-detalhe.component.scss'],
 })
 export class EventoDetalheComponent implements OnInit {
-  form = {} as FormGroup;
+  formGroup = {} as FormGroup;
+
+  get form(): any {
+    return this.formGroup.controls;
+  }
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.validation();
+  }
+
+  public resetForm(): void {
+    this.formGroup.reset();
+  }
 
   public validation(): void {
-    this.form = new FormGroup({
-      tema: new FormControl('', [
+    this.formGroup = this.fb.group({
+      tema: this.fb.control('', [
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(50),
       ]),
-      local: new FormControl('', [Validators.required]),
-      dataEvento: new FormControl('', [Validators.required]),
-      qtdPessoas: new FormControl('', [Validators.max(120000)]),
-      telefone: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      imagemURL: new FormControl('', [Validators.required]),
+      local: this.fb.control('', [Validators.required]),
+      dataEvento: this.fb.control('', [Validators.required]),
+      qtdPessoas: this.fb.control('', [
+        Validators.required,
+        Validators.max(120000),
+      ]),
+      telefone: this.fb.control('', [Validators.required]),
+      email: this.fb.control('', [Validators.required, Validators.email]),
+      imagemURL: this.fb.control('', [Validators.required]),
     });
-  }
 
-  constructor() {}
-
-  ngOnInit(): void {
-    this.validation();
+    // this.formGroup = this.fb.group({
+    //   tema: [
+    //     '',
+    //     [
+    //       Validators.required,
+    //       Validators.minLength(4),
+    //       Validators.maxLength(50),
+    //     ],
+    //   ],
+    //   local: ['', Validators.required],
+    //   dataEvento: ['', Validators.required],
+    //   qtdPessoas: ['', [Validators.required, Validators.max(120000)]],
+    //   telefone: ['', Validators.required],
+    //   email: ['', [Validators.required, Validators.email]],
+    //   imagemURL: ['', Validators.required],
+    // });
   }
 }
